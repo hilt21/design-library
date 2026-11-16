@@ -1,25 +1,19 @@
-"""Build, check, or sync the Design Library export. Python 3.11+, no dependencies."""
+"""Validate design packages and generate a portable, versioned catalog."""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import re
-import shutil
-import subprocess
 import sys
-import unicodedata
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
-IDENTIFIER = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
-SOURCE_REPO = re.compile(r"[\w.-]+/[\w.-]+")
-SHA = re.compile(r"[0-9a-f]{40}")
-FILE = re.compile(r"[A-Z][A-Z-]*\.md")
+ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+SHA = re.compile(r"[0-9a-f]{40}\Z")
+DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 REPOSITORY = "hilt21/design-library"
-CATALOG = "catalog.json"
 EXPORT = "exports/index.json"
-ROUTER_PACKAGE = "skills/design-library"
 
 
 def unique_object(pairs):
@@ -39,127 +33,146 @@ def encode(data):
     return (json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
 
 
-def normalized(alias):
-    return unicodedata.normalize("NFKC", alias).strip().casefold()
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
 
 
-def identifiers(values, field, *, required=False):
-    if not isinstance(values, list) or (required and not values):
-        raise ValueError(f"{field} must be a list")
-    if any(not isinstance(value, str) or not IDENTIFIER.fullmatch(value) for value in values):
-        raise ValueError(f"Invalid identifier in {field}")
-    if len(values) != len(set(values)):
-        raise ValueError(f"Duplicate identifier in {field}")
+def normalized(value):
+    import unicodedata
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError("Aliases must be nonempty strings")
+    return unicodedata.normalize("NFKC", value).strip().casefold()
+
+
+def strings(values, field, *, identifiers=False, required=False):
+    if (not isinstance(values, list) or (required and not values)
+            or any(not isinstance(v, str) or not v for v in values)
+            or len(values) != len(set(values))):
+        raise ValueError(f"{field} needs unique nonempty strings")
+    if identifiers and any(not ID.fullmatch(v) for v in values):
+        raise ValueError(f"Invalid ID in {field}")
+    return values
+
+
+def safe_path(root, name):
+    if (not isinstance(name, str) or not name or "\\" in name
+            or any(part in {"", ".", "..", ".git"} for part in name.split("/"))
+            or PurePosixPath(name).is_absolute()):
+        raise ValueError(f"Invalid relative path: {name!r}")
+    target = root
+    for part in name.split("/"):
+        target /= part
+        if target.is_symlink():
+            raise ValueError(f"Symlink in package path: {name}")
+    if not target.resolve().is_relative_to(root.resolve()):
+        raise ValueError(f"Path escapes package: {name}")
+    return target
+
+
+def inventory(root):
+    files = {}
+    for path in sorted(root.rglob("*")):
+        rel = path.relative_to(root).as_posix()
+        safe_path(root, rel)
+        if path.is_file():
+            files[rel] = digest(path.read_bytes())
+    return files
 
 
 def check_source(source):
-    if set(source) != {"repository", "commit", "path", "license"}:
-        raise ValueError("Source requires repository, commit, path, and license")
-    path = source["path"]
-    if (not SOURCE_REPO.fullmatch(source["repository"]) or not SHA.fullmatch(source["commit"])
-            or not source["license"] or "\\" in path
-            or any(part in {"", ".", "..", ".git"} for part in path.split("/"))):
-        raise ValueError(f"Invalid provenance: {source}")
-
-
-def checked_files(root, entry):
-    entry_id = entry["id"]
-    filename = {"skill": "SKILL.md", "instruction": "INSTRUCTIONS.md",
-                "prompt": "PROMPT.md"}.get(entry["type"])
-    if not filename or entry["entry"] != filename:
-        raise ValueError(f"Type and entry path disagree: {entry_id}")
-    names = [filename, *entry["dependencies"]]
-    if any(not isinstance(name, str) or not FILE.fullmatch(name) for name in names):
-        raise ValueError(f"Invalid Markdown filename: {entry_id}")
-    if len(names) != len(set(names)):
-        raise ValueError(f"Repeated file or self dependency: {entry_id}")
-    folder = root / "entries" / entry_id
-    if folder.is_symlink() or (root / "entries").is_symlink():
-        raise ValueError(f"Symlink in entry: {entry_id}")
-    if {file.name for file in folder.iterdir()} != set(names):
-        raise ValueError(f"Files differ from declaration: {entry_id}")
-    result = {}
-    for name in names:
-        path = folder / name
-        if path.is_symlink() or not path.is_file():
-            raise ValueError(f"Invalid entry file: {path}")
-        contents = path.read_bytes()
-        if not contents or len(contents) > 8000 or b"\r" in contents:
-            raise ValueError(f"Expected 1–8000 bytes of UTF-8 with LF endings: {path}")
-        header = re.match(r"\A---\n(.+?)\n---\n(.*)\Z", contents.decode(), re.S)
-        if not header or not header[2].strip():
-            raise ValueError(f"Missing frontmatter or body: {path}")
-        if name == filename:
-            identity = "name" if entry["type"] == "skill" else "id"
-            if f"{identity}: {entry_id}" not in header[1].splitlines():
-                raise ValueError(f"Entry frontmatter mismatch: {entry_id}")
-        result[path.relative_to(root).as_posix()] = hashlib.sha256(contents).hexdigest()
-    return result
+    if (not isinstance(source, dict) or not re.fullmatch(r"[\w.-]+/[\w.-]+", str(source.get("repository", "")))
+            or not SHA.fullmatch(str(source.get("commit", ""))) or not source.get("license")):
+        raise ValueError("Source needs a repository, full commit, path and license")
+    safe_path(ROOT, source["path"])
 
 
 def build(root):
-    data = as_json(root / CATALOG)
-    if data["schema_version"] != 1 or data["repository"] != REPOSITORY:
+    data = as_json(root / "catalog.json")
+    if data.get("schema_version") != 2 or data.get("repository") != REPOSITORY:
         raise ValueError("Unsupported catalog identity")
-    ids = [entry["id"] for entry in data["entries"]]
-    identifiers(ids, "entry IDs", required=True)
-    if {path.name for path in (root / "entries").iterdir()} != set(ids):
+    ids = strings([e["id"] for e in data["entries"]], "entry IDs", identifiers=True, required=True)
+    if set(p.name for p in (root / "entries").iterdir()) != set(ids):
         raise ValueError("Entry directories differ from catalog")
-    aliases = {normalized(entry_id): entry_id for entry_id in ids}
+    aliases = {normalized(eid) for eid in ids}
     entries = {}
     for entry in data["entries"]:
-        entry_id = entry["id"]
-        for field in ("stages", "projects", "required_capabilities"):
-            identifiers(entry[field], field, required=field == "stages")
+        eid = entry["id"]
+        for field in ("domains", "stages", "required_capabilities"):
+            strings(entry[field], field, identifiers=True, required=field != "required_capabilities")
+        strings(entry["aliases"], "aliases")
         for alias in entry["aliases"]:
             key = normalized(alias)
-            if not key or key in aliases:
-                raise ValueError(f"Empty or conflicting alias: {alias!r}")
-            aliases[key] = entry_id
+            if key in aliases:
+                raise ValueError(f"Conflicting alias: {alias}")
+            aliases.add(key)
+        if "projects" in entry:
+            raise ValueError("Project bindings belong to the consumer")
+        for field in ("inputs", "outputs", "cases"):
+            strings(entry[field], field, required=True)
+        if not isinstance(entry.get("description"), str) or not entry["description"]:
+            raise ValueError(f"Missing description: {eid}")
         check_source(entry["source"])
-        files = checked_files(root, entry)
-        prefix = f"entries/{entry_id}/"
-        entries[entry_id] = {
-            **entry, "entry": prefix + entry["entry"],
-            "dependencies": [prefix + name for name in entry["dependencies"]],
-            "files": files,
-        }
+        adaptation = entry["adaptation"]
+        if adaptation["relationship"] not in {"adapted", "reference", "original"}:
+            raise ValueError(f"Unknown source relationship: {eid}")
+        for field in ("retained", "changed", "omitted"):
+            strings(adaptation[field], field)
+        expected = {"skill": "SKILL.md", "instruction": "INSTRUCTIONS.md", "prompt": "PROMPT.md"}.get(entry["type"])
+        if entry["entry"] != expected:
+            raise ValueError(f"Type and entry disagree: {eid}")
+        folder = safe_path(root, f"entries/{eid}")
+        files = inventory(folder)
+        required = strings(entry["required"], "required")
+        resources = entry["resources"]
+        if not isinstance(resources, dict) or any(not purpose for purpose in resources.values()):
+            raise ValueError(f"Invalid optional resources: {eid}")
+        paths = [entry["entry"], *required, *resources]
+        if len(paths) != len(set(paths)) or set(paths) != set(files):
+            raise ValueError(f"Files differ from declaration or self dependency: {eid}")
+        for path in paths:
+            file = safe_path(folder, path)
+            if file.suffix not in {".md", ".json", ".txt"}:
+                raise ValueError(f"Unsupported resource type: {path}")
+            text = file.read_text(encoding="utf-8")
+            if not text.strip():
+                raise ValueError(f"Empty resource: {path}")
+            if file.suffix == ".json":
+                as_json(file)
+        text = (folder / entry["entry"]).read_text()
+        header = re.match(r"\A---\n(.+?)\n---\n(.+)\Z", text, re.S)
+        identity = "name" if entry["type"] == "skill" else "id"
+        if not header or f"{identity}: {eid}" not in header[1].splitlines():
+            raise ValueError(f"Entry frontmatter mismatch: {eid}")
+        for imported in entry.get("imported_files", []):
+            if imported["local"] not in files or files[imported["local"]] != imported["sha256"]:
+                raise ValueError(f"Imported file drift: {eid}")
+            safe_path(root, imported["upstream"])
+        entries[eid] = {**entry, "files": files, "content_sha256": digest(encode(files))}
     for reference in data["references"]:
         check_source(reference["source"])
-        if not reference["purpose"]:
-            raise ValueError("Reference purpose is required")
-    return {"schema_version": 1, "repository": REPOSITORY, "entries": entries,
+    return {"schema_version": 2, "repository": REPOSITORY, "entries": entries,
             "references": data["references"]}
 
 
-def sync(root, router_root, export, expected_sha):
-    if not SHA.fullmatch(expected_sha):
-        raise ValueError("Sync requires a complete design-library commit SHA")
-    # Only published, clean source trees may supply an executable snapshot.
-    git = ["git", "-C", str(root)]
-    sha = subprocess.check_output([*git, "rev-parse", "HEAD"], text=True).strip()
-    dirty = subprocess.check_output([*git, "status", "--porcelain"], text=True).strip()
-    if sha != expected_sha or dirty:
-        raise ValueError("Design Library checkout must be clean and match --source-sha")
-    target = router_root / ROUTER_PACKAGE
-    if not (router_root / "project-router.yaml").is_file() or not (target / "SKILL.md").is_file():
-        raise ValueError("Destination requires the project-router Design Library adapter")
-    selected = {entry_id: entry for entry_id, entry in export["entries"].items()
-                if "content-studio" in entry["projects"]}
-    if not selected:
-        raise ValueError("No Design Library exports for content-studio")
-    if target.is_symlink() or (target / "entries").is_symlink() or (target / "index.json").is_symlink():
-        raise ValueError("Symlink in router destination")
-    if (target / "entries").exists():
-        shutil.rmtree(target / "entries")
-    for entry in selected.values():
-        for path in entry["files"]:
-            destination = target / path
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_bytes((root / path).read_bytes())
-    (target / "index.json").write_bytes(encode({
-        "schema_version": 1, "repository": REPOSITORY, "commit_sha": sha, "entries": selected,
-    }))
+def export_files(data):
+    descriptors = {}
+    result = {}
+    for eid, entry in data["entries"].items():
+        path = f"exports/entries/{eid}.json"
+        contents = encode(entry)
+        result[path] = contents
+        descriptors[eid] = {key: entry[key] for key in ("id", "description", "type", "domains", "stages", "aliases")}
+        descriptors[eid].update({"manifest": path, "sha256": digest(contents)})
+    result[EXPORT] = encode({"schema_version": 2, "repository": REPOSITORY,
+                            "entries": descriptors, "references": data["references"]})
+    return result
+
+
+def check_export(root, expected):
+    actual = inventory(root / "exports")
+    wanted = {path.removeprefix("exports/"): digest(content) for path, content in expected.items()}
+    if actual != wanted:
+        raise ValueError("Stale export. Review changes and run --write.")
 
 
 def main():
@@ -171,21 +184,28 @@ def main():
     parser.add_argument("--source-sha")
     args = parser.parse_args()
     try:
-        export = build(ROOT)
-        expected = encode(export)
+        data = build(ROOT)
+        expected = export_files(data)
         if args.write:
-            (ROOT / EXPORT).write_bytes(expected)
-        elif (ROOT / EXPORT).read_bytes() != expected:
-            raise ValueError("Stale export. Review changes and run --write.")
+            for path, contents in expected.items():
+                file = ROOT / path
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_bytes(contents)
+            for file in (ROOT / "exports").rglob("*.json"):
+                if file.relative_to(ROOT).as_posix() not in expected:
+                    file.unlink()
+        else:
+            check_export(ROOT, expected)
         if args.sync_router:
-            sync(ROOT, args.sync_router.resolve(), export, args.source_sha or "")
-        print(f"Design Library: {len(export['entries'])} entries, "
-              f"{len(export['references'])} references validated")
-    except (KeyError, TypeError, ValueError, OSError, subprocess.CalledProcessError) as exc:
+            from tools.sync import sync
+            sync(ROOT, args.sync_router.resolve(), data, args.source_sha or "")
+        print(f"Design Library: {len(data['entries'])} entries validated")
+    except (KeyError, TypeError, ValueError, OSError) as exc:
         print(f"Design Library: {exc}", file=sys.stderr)
         return 1
     return 0
 
 
 if __name__ == "__main__":
+    sys.path.insert(0, str(ROOT))
     raise SystemExit(main())

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "repository": "hilt21/design-library",
   "entries": [
     {
@@ -15,20 +15,90 @@
         "mono-color"
       ],
       "entry": "SKILL.md",
-      "dependencies": [
-        "PROMPT.md",
-        "CHECKLIST.md"
-      ],
-      "projects": [
-        "content-studio"
-      ],
       "required_capabilities": [],
       "source": {
         "repository": "yanliudesign/mono-color-skill",
         "commit": "c8ff70597ddedcd65f21a0b528f6a70c35690b0a",
         "path": "SKILL.md",
-        "license": "MIT"
-      }
+        "license": "MIT",
+        "watch_paths": [
+          "SKILL.md",
+          "design-system/colors.json",
+          "design-system/compositions.json",
+          "design-system/typography.json",
+          "LICENSE"
+        ]
+      },
+      "required": [
+        "design-system/recipes.json",
+        "PROMPT.md",
+        "CHECKLIST.md"
+      ],
+      "resources": {
+        "design-system/colors.json": "自定义色板或需要双色时读取完整色表",
+        "design-system/compositions.json": "默认配方不满足信息结构时读取全部构图",
+        "design-system/typography.json": "默认字体角色不适用时读取全部字体规则",
+        "references/examples.md": "需要选构图或检查失败模式时读取",
+        "references/UPSTREAM-LICENSE.txt": "原始数据许可与署名"
+      },
+      "description": "图片编辑海报的配方、提示词和视觉验收",
+      "domains": [
+        "image-design"
+      ],
+      "inputs": [
+        "主题与受众",
+        "画幅与交付阶段",
+        "逐字文案或无字要求"
+      ],
+      "outputs": [
+        "可复用视觉配方",
+        "最终提示词",
+        "验收状态"
+      ],
+      "cases": [
+        "mono-cover-zh",
+        "mono-cover-en",
+        "independent-series"
+      ],
+      "adaptation": {
+        "relationship": "adapted",
+        "retained": [
+          "上游配色、构图与字体角色数据",
+          "单主体、有效留白、受控网点与可重复配方"
+        ],
+        "changed": [
+          "按当前任务语言保留原文",
+          "默认单墨，显式双色才使用两种墨",
+          "明确停在请求阶段",
+          "用选定配方减少默认上下文"
+        ],
+        "omitted": [
+          "原作者示例图和第三方参考图片",
+          "上游默认生图和固定桌面路径"
+        ]
+      },
+      "imported_files": [
+        {
+          "local": "design-system/colors.json",
+          "upstream": "design-system/colors.json",
+          "sha256": "e299d6b4a2ec36e2e59b7095b85bae5f13609f505d21c9a83561088f7c446b48"
+        },
+        {
+          "local": "design-system/compositions.json",
+          "upstream": "design-system/compositions.json",
+          "sha256": "e0c032e96eb14f53699614c8b4ecd35af1e145f5ffb8fe53b9214d1eb6032f30"
+        },
+        {
+          "local": "design-system/typography.json",
+          "upstream": "design-system/typography.json",
+          "sha256": "b20f558444aab2c93b6339b76aa3178ae9e04e25eed1059cd2db8044733db26f"
+        },
+        {
+          "local": "references/UPSTREAM-LICENSE.txt",
+          "upstream": "LICENSE",
+          "sha256": "2025880f6441e121c76c01bc5996e84a7498d9d5aa7222a10400d303bdd043cb"
+        }
+      ]
     },
     {
       "id": "technical-deck-design",
@@ -41,14 +111,48 @@
         "PPT设计"
       ],
       "entry": "SKILL.md",
-      "dependencies": [],
-      "projects": [],
       "required_capabilities": [],
       "source": {
         "repository": "hugohe3/ppt-master",
         "commit": "3af3e8ef774c4d67ee57e1306d9256d08c9ee1bf",
         "path": "README.md",
-        "license": "MIT"
+        "license": "MIT",
+        "watch_paths": [
+          "README.md"
+        ]
+      },
+      "required": [],
+      "resources": {},
+      "description": "技术演示稿逐页设计与可编辑对象规格",
+      "domains": [
+        "presentation-design"
+      ],
+      "inputs": [
+        "听众和演讲时长",
+        "事实材料",
+        "模板或视觉要求"
+      ],
+      "outputs": [
+        "逐页规格",
+        "编辑对象清单",
+        "页面验收标准"
+      ],
+      "cases": [
+        "embc-five-slides"
+      ],
+      "adaptation": {
+        "relationship": "reference",
+        "retained": [
+          "上游方法的任务分解与检查维度"
+        ],
+        "changed": [
+          "为宿主无关的设计规格重新编写",
+          "外部动作遵循调用方阶段与权限"
+        ],
+        "omitted": [
+          "上游安装器和运行时",
+          "未经实际验收的能力主张"
+        ]
       }
     },
     {
@@ -62,14 +166,48 @@
         "Three.js重建"
       ],
       "entry": "SKILL.md",
-      "dependencies": [],
-      "projects": [],
       "required_capabilities": [],
       "source": {
         "repository": "img2threejs/img2threejs",
         "commit": "0c0c49bc168e648dbaf9c8c080474de0b3a941b6",
         "path": "SKILL.md",
-        "license": "Apache-2.0"
+        "license": "Apache-2.0",
+        "watch_paths": [
+          "SKILL.md"
+        ]
+      },
+      "required": [],
+      "resources": {},
+      "description": "参考图到有明确几何与运动约束的建模规格",
+      "domains": [
+        "threejs-design"
+      ],
+      "inputs": [
+        "参考图",
+        "已知尺寸和运动拓扑",
+        "目标交付阶段"
+      ],
+      "outputs": [
+        "零件与枢轴规格",
+        "视图和运动验收清单",
+        "未知量"
+      ],
+      "cases": [
+        "caliper-pivot-contract"
+      ],
+      "adaptation": {
+        "relationship": "reference",
+        "retained": [
+          "上游方法的任务分解与检查维度"
+        ],
+        "changed": [
+          "为宿主无关的设计规格重新编写",
+          "外部动作遵循调用方阶段与权限"
+        ],
+        "omitted": [
+          "上游安装器和运行时",
+          "未经实际验收的能力主张"
+        ]
       }
     },
     {
@@ -82,14 +220,47 @@
         "网页设计评审"
       ],
       "entry": "INSTRUCTIONS.md",
-      "dependencies": [],
-      "projects": [],
       "required_capabilities": [],
       "source": {
         "repository": "pbakaus/impeccable",
         "commit": "d41d9860b0094dcb68030657da63461212835aaa",
         "path": "README.md",
-        "license": "Apache-2.0"
+        "license": "Apache-2.0",
+        "watch_paths": [
+          "README.md"
+        ]
+      },
+      "required": [],
+      "resources": {},
+      "description": "基于页面状态和截图证据的网页设计评审",
+      "domains": [
+        "web-design"
+      ],
+      "inputs": [
+        "页面与主任务",
+        "可访问的页面或截图",
+        "视口与状态"
+      ],
+      "outputs": [
+        "可定位的问题清单",
+        "复验步骤"
+      ],
+      "cases": [
+        "responsive-first-screen"
+      ],
+      "adaptation": {
+        "relationship": "reference",
+        "retained": [
+          "上游方法的任务分解与检查维度"
+        ],
+        "changed": [
+          "为宿主无关的设计规格重新编写",
+          "外部动作遵循调用方阶段与权限"
+        ],
+        "omitted": [
+          "上游安装器和运行时",
+          "未经实际验收的能力主张"
+        ]
       }
     },
     {
@@ -103,16 +274,49 @@
         "降低AI味"
       ],
       "entry": "INSTRUCTIONS.md",
-      "dependencies": [],
-      "projects": [
-        "content-studio"
-      ],
       "required_capabilities": [],
       "source": {
         "repository": "petergyang/no-ai-slop",
         "commit": "000650b156983f5159695b441477f4e63b25dc85",
         "path": "skills/no-ai-slop/SKILL.md",
-        "license": "MIT"
+        "license": "MIT",
+        "watch_paths": [
+          "skills/no-ai-slop/SKILL.md"
+        ]
+      },
+      "required": [],
+      "resources": {},
+      "description": "保留事实与作者语气的最小成稿审校",
+      "domains": [
+        "content-writing"
+      ],
+      "inputs": [
+        "草稿",
+        "渠道规则",
+        "事实底稿"
+      ],
+      "outputs": [
+        "修订稿",
+        "改动说明",
+        "待核实项"
+      ],
+      "cases": [
+        "wechat-emb-draft",
+        "linkedin-technical-draft"
+      ],
+      "adaptation": {
+        "relationship": "reference",
+        "retained": [
+          "上游方法的任务分解与检查维度"
+        ],
+        "changed": [
+          "为宿主无关的设计规格重新编写",
+          "外部动作遵循调用方阶段与权限"
+        ],
+        "omitted": [
+          "上游安装器和运行时",
+          "未经实际验收的能力主张"
+        ]
       }
     }
   ],
