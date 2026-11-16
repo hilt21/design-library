@@ -48,6 +48,10 @@ python -m tools.check_upstream --entry mono-color-editorial --checkout ../mono-c
 
 输出命中文件的变化、基线/候选提交与受影响的用例。变更通过条目适配和回归后再更新 source.commit。采集失败时命令失败，不更改当前版本。
 
+## 验收证据
+
+[两组独立代理的对照产物与复核](evals/agent-comparison/README.md) 已保存，实际图片和其他三类产物保留待验状态。
+
 ## 许可
 
 自有代码和文字采用 [MIT](LICENSE)。单色海报包内的原始设计数据遵循 [Yan Liu 的 MIT 许可](entries/mono-color-editorial/references/UPSTREAM-LICENSE.txt)。原作者图像通过来源链接查阅。导入文件及其摘要见 catalog.json。

@@ -1,0 +1,368 @@
+{
+  "cases": [
+    {
+      "id": "A",
+      "title": "让台架记录成为验证起点",
+      "body": "以一个虚构研发案例为例：执行器由电机与传动机构产生夹紧力。我们的台架记录指令、位置与夹紧力，希望核对指令与实际响应的关系。我关心每次动作是否可验证：指令发出后，位置与夹紧力如何变化？我会用这些记录提出待核对的问题。判定动作是否符合要求，还需要明确的判据。后续还要做故障和长期测试。现有材料没有寿命、响应时间、SIL或商业成熟度数据，暂不足以支持性能或安全结论。",
+      "changes": [
+        {
+          "issue": "开头使用技术进步与行业颠覆的泛化判断，事实底稿无法支持。",
+          "edit": "删去空泛开头，直接说明虚构案例及电机、传动机构产生夹紧力的机制。"
+        },
+        {
+          "issue": "精准控制制动力和更安全的列车均超出已有证据；夹紧力记录也不能直接证明制动力控制精度。",
+          "edit": "删除性能与安全保证，将表述限定为台架记录指令、位置与夹紧力。"
+        },
+        {
+          "issue": "制动状态透明的表述容易被理解为已完成全面状态验证。",
+          "edit": "改为核对指令与实际响应的关系，并将判据列为仍需明确的条件。"
+        },
+        {
+          "issue": "原稿对核心问题的套式转折增加表达负担。",
+          "edit": "改成第一人称判断“我关心每次动作是否可验证”，保留作者的工程关注点。"
+        },
+        {
+          "issue": "后续测试与当前证据的边界需要明确。",
+          "edit": "保留“希望核对指令与实际响应的关系”和“后续还要做故障和长期测试”，补充缺少寿命、响应时间、SIL及商业成熟度数据的限制。"
+        },
+        {
+          "issue": "贴文标题和封面文字需要分别承担信息。",
+          "edit": "贴文标题强调记录在验证中的作用；封面逐字使用指定问题，不改动原文。"
+        }
+      ],
+      "recipe": {
+        "channel": "微信贴图短文封面",
+        "audience": "工程师",
+        "stage": "方案与最终提示词；不生成图片，不发布",
+        "canvas": {
+          "aspect_ratio": "3:4",
+          "width_px": 1200,
+          "height_px": 1600,
+          "count": 1
+        },
+        "cover_text": "制动状态如何验证？",
+        "language": "简体中文",
+        "subject": "一个概念夹钳，以外观轮廓表达夹持动作的对象。",
+        "identity_features": [
+          "相向的两侧钳口",
+          "连接钳口的简洁外壳",
+          "钳口之间清楚可见的负空间"
+        ],
+        "evidence_boundary": "无参考照片及内部结构资料。主体采用虚构概念外形，不对应真实型号；仅表现外观，不绘制剖面、内部传动、传感器位置、尺寸、实测曲线或安全认证标记。",
+        "paper": {
+          "hex": "#F2EBD9",
+          "description": "暖米色未涂布纸底"
+        },
+        "inks": [
+          {
+            "hex": "#24433B",
+            "name": "深松绿",
+            "role": "全部文字、轮廓、网点及阴影"
+          }
+        ],
+        "ink_count": 1,
+        "composition": {
+          "coordinate_system": "坐标以画布左上角为原点，x向右、y向下；数值为画布比例。",
+          "subject_center": {
+            "x": 0.625,
+            "y": 0.64
+          },
+          "subject_bounding_box": {
+            "left": 0.31,
+            "top": 0.39,
+            "width": 0.63,
+            "height": 0.5
+          },
+          "subject_scale": "主体包围盒占画布宽63%、高50%，约为画布面积31.5%；夹钳完整可见。",
+          "subject_orientation": "轻微三分之四视角，钳口开口朝向左上方。",
+          "main_negative_space": {
+            "shape": "竖向矩形留白",
+            "left": 0.08,
+            "top": 0.34,
+            "width": 0.19,
+            "height": 0.52
+          },
+          "title_box": {
+            "left": 0.08,
+            "top": 0.1,
+            "width": 0.84,
+            "height": 0.12
+          },
+          "safe_margin": "文字距画布边缘至少8%；主体距画布边缘至少6%。"
+        },
+        "hierarchy": {
+          "primary": "标题单行置于上方左对齐，约80 px粗体中文无衬线字，100%实墨。",
+          "secondary": "下半部的概念夹钳，以轮廓与网点体积感构成第二视觉层级。",
+          "relation": "标题提出验证问题，夹钳提供工程对象；左侧留白连接标题与钳口开口，形成清楚的阅读路径。",
+          "additional_text": "无副标题、标签、标志或其他文字。"
+        },
+        "print_texture": {
+          "method": "同一深松绿墨色的疏密网点，加轻微纸纤维与印刷边缘不均。",
+          "coverage": "主体使用约15%、40%、80%网点覆盖及100%实墨；纸底透出产生明暗层次。",
+          "limits": "文字保持实墨清晰，不用网点侵蚀字形；禁止第二种墨色、独立灰色、彩色高光及彩色渐变。"
+        }
+      },
+      "prompt": "为面向工程师的「微信贴图短文」设计一张3:4竖版单色编辑海报，画布1200×1600，只输出一张画布。以一个概念夹钳作为唯一主体，保留相向的两侧钳口、连接钳口的简洁外壳，以及钳口之间清楚可见的负空间。主体没有参考照片或内部结构依据，采用虚构概念外形，不对应真实型号；只画外观，不画剖面、内部传动、传感器位置、尺寸标注、实测曲线或认证标记。纸色为暖米色#F2EBD9，唯一墨色为深松绿#24433B，全部文字、轮廓、网点和阴影均使用这一种墨。所有深浅只由网点覆盖率与纸底透出产生，禁止第二种墨色、独立灰色和彩色渐变。主体采用轻微三分之四视角，钳口开口朝向左上方；包围盒位于画布x=31%、y=39%，宽63%、高50%，主体完整可见。画布左侧x=8%至27%、y=34%至86%保留清楚的竖向矩形空白。标题框位于x=8%、y=10%，宽84%、高12%。只渲染这九个中文显示字符，逐字准确包含问号：「制动状态如何验证？」。标题单行左对齐，约80 px粗体中文无衬线字，使用100%实墨；不要添加引号、副标题、标签、标志或任何其他文字。先读上方标题，再看到下半部夹钳，左侧留白与钳口负空间呼应。主体以约15%、40%、80%网点和实墨建立体积，保留轻微未涂布纸纤维及印刷边缘不均，文字不做侵蚀效果。使用原创构图，工程感克制清楚，不呈现未经验证的性能或安全结论。",
+      "checks": {
+        "title_length": {
+          "rule": "按显示字符逐字计数，含标点，不超过20。",
+          "count": 11,
+          "passed": true
+        },
+        "body_length": {
+          "rule": "正文150至250字；报告不含空白的显示字符数，并附汉字数。",
+          "display_characters": 180,
+          "han_characters": 161,
+          "passed": true
+        },
+        "fact_check": {
+          "passed": true,
+          "confirmed_material": [
+            "虚构研发案例",
+            "电机与传动机构产生夹紧力",
+            "台架记录指令、位置与夹紧力"
+          ],
+          "author_judgments": [
+            "关心每次动作是否可验证",
+            "使用记录提出待核对问题",
+            "判断动作是否符合要求需要明确判据"
+          ],
+          "future_work": [
+            "故障测试",
+            "长期测试"
+          ],
+          "unsupported_conclusions_added": false,
+          "missing_data_retained": [
+            "寿命",
+            "响应时间",
+            "SIL",
+            "商业成熟度"
+          ]
+        },
+        "exact_cover_text": {
+          "expected": "制动状态如何验证？",
+          "recipe_and_prompt_match": true,
+          "character_count": 9
+        },
+        "visual_recipe": {
+          "passed": true,
+          "aspect_ratio": "3:4",
+          "ink_count": 1,
+          "ink_hex": "#24433B",
+          "paper_hex": "#F2EBD9",
+          "subject_scope": "概念夹钳外观",
+          "layout_hierarchy_and_negative_space_defined": true
+        },
+        "language_check": {
+          "passed": true,
+          "body_language": "中文，保留底稿缩写SIL",
+          "cover_language": "简体中文"
+        },
+        "actual_image_checks": {
+          "status": "待执行",
+          "reason": "本次仅交付方案，未生成图片。",
+          "pending": [
+            "字形与逐字准确性",
+            "文字截断",
+            "实际读取顺序",
+            "实际墨色数量",
+            "主体可见结构",
+            "画布比例与独立性"
+          ]
+        },
+        "delivery_stage": {
+          "passed": true,
+          "image_generated": false,
+          "published": false
+        }
+      }
+    },
+    {
+      "id": "B",
+      "title": "A workflow built around evidence",
+      "body": "In a fictional development case, a motor and transmission mechanism generate clamping force. Our test bench records commands, position, and clamping force. I want to use those records to check the relationship between each command and the resulting response.\n\nMy next step would be to define acceptance criteria before interpreting a run. Then I would compare the recorded signals against those criteria and identify questions for fault testing and long-term testing.\n\nFor me, a testable workflow makes its evidence and remaining questions explicit. The available material includes no lifetime, response time, SIL, or commercial maturity data. I cannot infer performance or safety from these records alone. I would treat them as a starting point for verification, with further tests still needed.",
+      "changes": [
+        {
+          "issue": "The source draft opens with broad industry and safety claims that the supplied material does not establish.",
+          "edit": "Open with the fictional case and its known mechanism, then state exactly what the bench records."
+        },
+        {
+          "issue": "The original precision claim could be mistaken for measured braking performance.",
+          "edit": "Use clamping force consistently and describe checking the relationship between commands and responses without claiming control accuracy."
+        },
+        {
+          "issue": "The workflow theme needs concrete actions while keeping proposed work separate from completed work.",
+          "edit": "Use first-person conditional language for defining acceptance criteria, comparing records, and identifying questions for future tests."
+        },
+        {
+          "issue": "An English adaptation should retain the engineer’s own judgment.",
+          "edit": "Keep I want, My next step would be, and For me to distinguish the author’s reasoning from the supplied case facts."
+        },
+        {
+          "issue": "The limits of the available evidence affect the conclusion.",
+          "edit": "Explicitly retain the absence of lifetime, response time, SIL, and commercial maturity data, with no added performance or safety conclusion."
+        },
+        {
+          "issue": "The post title and fixed cover copy have separate roles.",
+          "edit": "The title frames the evidence workflow; the cover uses Make braking observable exactly as requested."
+        }
+      ],
+      "recipe": {
+        "channel": "LinkedIn post cover",
+        "audience": "Engineers and technical peers",
+        "stage": "Recipe and final prompt only; no image generation or publication",
+        "canvas": {
+          "aspect_ratio": "4:3",
+          "width_px": 1600,
+          "height_px": 1200,
+          "count": 1
+        },
+        "cover_text": "Make braking observable",
+        "language": "English",
+        "subject": "One conceptual clamp, shown through its exterior only.",
+        "identity_features": [
+          "Two opposing jaw faces",
+          "A simple connecting housing",
+          "A clearly visible open space between the jaws"
+        ],
+        "evidence_boundary": "No reference photograph or internal engineering specification is available. Use a fictional conceptual exterior without implying a real product geometry. Do not show a cutaway, internal transmission, sensor locations, dimensions, measured plots, or certification marks.",
+        "paper": {
+          "hex": "#F5F2E8",
+          "description": "Warm off-white uncoated paper"
+        },
+        "inks": [
+          {
+            "hex": "#1E4FA1",
+            "name": "Blue",
+            "role": "All lettering, outlines, halftone shading, and shadows"
+          }
+        ],
+        "ink_count": 1,
+        "composition": {
+          "coordinate_system": "Origin at the upper-left corner; x increases rightward and y downward; values are fractions of the canvas.",
+          "subject_center": {
+            "x": 0.68,
+            "y": 0.64
+          },
+          "subject_bounding_box": {
+            "left": 0.43,
+            "top": 0.37,
+            "width": 0.5,
+            "height": 0.54
+          },
+          "subject_scale": "The subject bounding box spans 50% of canvas width and 54% of canvas height, approximately 27% of canvas area. Keep the full clamp visible.",
+          "subject_orientation": "A restrained three-quarter exterior view, with the open jaws directed toward the left.",
+          "main_negative_space": {
+            "shape": "A broad vertical rectangle",
+            "left": 0.07,
+            "top": 0.37,
+            "width": 0.29,
+            "height": 0.48
+          },
+          "title_box": {
+            "left": 0.07,
+            "top": 0.1,
+            "width": 0.86,
+            "height": 0.14
+          },
+          "safe_margin": "Keep the title and the subject at least 7% from the left and right edges; keep the full subject inside the canvas."
+        },
+        "hierarchy": {
+          "primary": "The exact title runs on one line at the upper left in an approximately 92 px bold sans serif, printed in solid blue.",
+          "secondary": "The conceptual clamp occupies the lower right with blue outlines and halftone volume.",
+          "relation": "The title states the author’s working principle. The clamp gives the principle a concrete engineering subject, with open space on the left creating a clear pause between text and object.",
+          "additional_text": "No subtitle, labels, logos, or other wording."
+        },
+        "print_texture": {
+          "method": "Blue halftone density over warm off-white paper, with subtle paper grain and slightly uneven print edges.",
+          "coverage": "Use approximately 15%, 40%, and 80% halftone coverage plus solid ink for the subject. Let the paper show through for highlights.",
+          "limits": "Keep lettering solid and crisp. Use exactly one blue ink; no black ink, independent gray, second accent color, or colored gradients."
+        }
+      },
+      "prompt": "Design one 4:3 landscape editorial cover for an English LinkedIn post aimed at engineers, on a 1600×1200 canvas. Use one conceptual clamp as the only subject, retaining two opposing jaw faces, a simple connecting housing, and a clearly visible open space between the jaws. No reference photograph or internal engineering specification is available. Show a fictional conceptual exterior only; do not imply an actual product geometry or add a cutaway, internal transmission, sensor locations, dimension labels, measured plots, or certification marks. Use warm off-white uncoated paper #F5F2E8 and exactly one blue ink #1E4FA1. All lettering, outlines, halftone shading, and shadows must use this same blue ink. Create tonal depth only through blue halftone density and exposed paper, with no black ink, independent gray, second accent color, or colored gradients. Place the complete clamp in a restrained three-quarter view, with its open jaws pointing left. Its bounding box starts at x=43%, y=37% and spans 50% of canvas width and 54% of canvas height. Preserve a clear rectangle of negative space at x=7% to 36% and y=37% to 85%. Place the title box at x=7%, y=10%, spanning 86% of canvas width and 14% of its height. Render exactly the English text Make braking observable, preserving capitalization and spaces, without quotation marks or added punctuation. Set it on one line, left aligned, in an approximately 92 px bold sans serif in solid blue. Do not add a subtitle, labels, logos, or any other text. The reading order should move from the upper title to the clamp at the lower right. Use approximately 15%, 40%, and 80% halftone coverage plus solid ink to define the subject, with subtle paper grain and slightly uneven printed edges. Keep the lettering crisp. Use an original composition. Output a single independent 4:3 canvas. The illustration must not imply verified performance, safety, or commercial readiness.",
+      "checks": {
+        "title_length": {
+          "rule": "No separate title length limit was specified for this case.",
+          "word_count": 5,
+          "passed": true
+        },
+        "body_length": {
+          "rule": "100 to 150 English words; whitespace-separated count, with long-term counted as one word.",
+          "word_count": 121,
+          "passed": true
+        },
+        "fact_check": {
+          "passed": true,
+          "confirmed_material": [
+            "The case is fictional.",
+            "A motor and transmission mechanism generate clamping force.",
+            "The test bench records commands, position, and clamping force."
+          ],
+          "author_judgments": [
+            "Use the records to check command-response relationships.",
+            "Define acceptance criteria before interpreting a run.",
+            "Make evidence and remaining questions explicit."
+          ],
+          "future_work": [
+            "Compare records with acceptance criteria.",
+            "Identify questions for fault testing.",
+            "Identify questions for long-term testing."
+          ],
+          "unsupported_conclusions_added": false,
+          "missing_data_retained": [
+            "Lifetime",
+            "Response time",
+            "SIL",
+            "Commercial maturity"
+          ]
+        },
+        "first_person_voice": {
+          "passed": true,
+          "examples": [
+            "I want",
+            "My next step would be",
+            "For me",
+            "I would treat"
+          ]
+        },
+        "exact_cover_text": {
+          "expected": "Make braking observable",
+          "recipe_and_prompt_match": true,
+          "case_and_spaces_preserved": true,
+          "added_punctuation": false
+        },
+        "visual_recipe": {
+          "passed": true,
+          "aspect_ratio": "4:3",
+          "ink_count": 1,
+          "ink_hex": "#1E4FA1",
+          "paper_hex": "#F5F2E8",
+          "subject_scope": "Conceptual clamp exterior",
+          "layout_hierarchy_and_negative_space_defined": true
+        },
+        "language_check": {
+          "passed": true,
+          "body_language": "English",
+          "cover_language": "English"
+        },
+        "actual_image_checks": {
+          "status": "Pending",
+          "reason": "This delivery contains a recipe and prompt only; no image was generated.",
+          "pending": [
+            "Glyph accuracy and exact wording",
+            "Text clipping",
+            "Actual reading order",
+            "Actual ink count",
+            "Visible subject structure",
+            "Canvas ratio and independence"
+          ]
+        },
+        "delivery_stage": {
+          "passed": true,
+          "image_generated": false,
+          "published": false
+        }
+      }
+    }
+  ]
+}
