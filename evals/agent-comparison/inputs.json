@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "source_commit": "39ceecd14049e3b48fdf63d39c9e4ef61f4d6ccf",
+    "files": {
+      "entries/mono-color-editorial/SKILL.md": "ccc37783e78e741a40de90161281bac2b5c3e307f9b3ba4426bd3feb58d01ebb",
+      "entries/mono-color-editorial/PROMPT.md": "22d10d9af4c813208c6829aada59492990b423194c7b0b2e41ef90e900728fdc",
+      "entries/mono-color-editorial/CHECKLIST.md": "8d21b7dc4eaae7690ea49da8394b648c60b7029dd0e56ba64089fb31b363f715",
+      "entries/channel-draft-review/INSTRUCTIONS.md": "4bcc05fff19d90c6b1f347699e5097b39384fc91eeab135eb803e32463f0b7c1"
+    },
+    "artifact": "baseline.json",
+    "artifact_sha256": "fd6a65f87612e56aff49a701cf17b1e68a5dc73fcff3dfeed0427faa5998c13c"
+  },
+  "candidate": {
+    "source_commit": "b0d62dee07845078b454d05d04c5f28da75670b3",
+    "files": {
+      "entries/mono-color-editorial/SKILL.md": "336392ec095f4b8831152585e97ff105a4782ef8786d038281d31dd39b68e06e",
+      "entries/mono-color-editorial/PROMPT.md": "22d10d9af4c813208c6829aada59492990b423194c7b0b2e41ef90e900728fdc",
+      "entries/mono-color-editorial/CHECKLIST.md": "8d21b7dc4eaae7690ea49da8394b648c60b7029dd0e56ba64089fb31b363f715",
+      "entries/channel-draft-review/INSTRUCTIONS.md": "83328479443c2c868cc19aac2d48af3a69f699e417f7a4ab4a9c9410d46b3c4c",
+      "entries/mono-color-editorial/design-system/recipes.json": "b84a37894a7e102afdb5b5be2ab7801ca792692c28906be9b5772fdac942a282",
+      "entries/mono-color-editorial/references/examples.md": "c504e99aae5cd182863c5d81a7532cb78d87e473608553e892a41a18d5dc3dd8"
+    },
+    "artifact": "candidate.json",
+    "artifact_sha256": "7b9d08eb862904435d8d924e6aa990caf0e6e57633a345da87b9a2e0c27cba0b"
+  }
+}

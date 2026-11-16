@@ -1,0 +1,501 @@
+{
+  "cases": [
+    {
+      "id": "A",
+      "title": "先把制动动作变成可核对的记录",
+      "body": "在这个虚构研发案例中，执行器通过电机与传动机构产生夹紧力。我们在台架上记录指令、位置与夹紧力，希望核对指令与实际响应的关系。我关心的是：每次动作能留下哪些证据，哪些状态仍无法从记录中确认？三类信号为核对提供了起点，也留下了需要检验的关联。接下来，我会先明确测试条件与判据，再做故障和长期测试，核对预期与实测的差异。目前还没有寿命、响应时间、SIL或商业成熟度数据，现有记录也不足以支持更安全的结论。",
+      "changes": [
+        {
+          "action": "删除泛化的技术进步开头与行业颠覆判断。",
+          "reason": "底稿没有行业影响证据，开头直接进入执行器及台架记录。"
+        },
+        {
+          "action": "删除精准控制制动力及状态已透明的断言。",
+          "reason": "底稿没有控制精度或可观测范围数据；改用已知机制与具体记录项。"
+        },
+        {
+          "action": "删除列车必将更安全的承诺。",
+          "reason": "底稿不支持安全提升结论，成稿明确这一证据边界。"
+        },
+        {
+          "action": "将原稿的固定转折改为第一人称工程问题。",
+          "reason": "保留对每次动作可验证性的关注，同时追问记录仍不能确认哪些状态。"
+        },
+        {
+          "action": "保留台架记录指令、位置与夹紧力，以及核对指令和实际响应的目的。",
+          "reason": "这些信息有底稿支持；开头明确案例为虚构。"
+        },
+        {
+          "action": "保留故障和长期测试为后续工作，把先明确条件与判据标为作者打算。",
+          "reason": "区分工作计划与已完成结果。"
+        },
+        {
+          "action": "补入尚无寿命、响应时间、SIL或商业成熟度数据。",
+          "reason": "保留底稿中的不确定程度，不增加性能或安全结论。"
+        }
+      ],
+      "recipe": {
+        "id": "technical-specimen",
+        "selection_reason": "技术与机械主题，使用孤立标本及外围标题，向工程师提出核对证据的问题。",
+        "stage": "方案及最终提示词，不生图",
+        "subject": {
+          "name": "概念电机械制动夹钳",
+          "representation": "原创外观概念表达，不对应已验证产品或真实结构图。",
+          "recognition_features": [
+            "夹钳主体",
+            "一对相向夹持面",
+            "不透明执行器外壳"
+          ],
+          "confirmed_mechanism": "执行器通过电机与传动机构产生夹紧力。",
+          "engineering_boundary": "输入没有内部结构资料，只画外观。不画剖面、透明外壳、齿轮排布、传感器布置、结构尺寸或性能曲线。"
+        },
+        "paper": {
+          "id": "substrate_cool_gray",
+          "name": "Cool Gray",
+          "hex": "#E9E9E5",
+          "counts_as_ink": false
+        },
+        "inks": [
+          {
+            "id": "ink_cobalt",
+            "name": "Cobalt",
+            "hex": "#2148B8",
+            "role": "主体、标题与网点共用的唯一墨色"
+          }
+        ],
+        "ink_count": 1,
+        "composition": {
+          "id": "composition_specimen_annotation",
+          "layout": "specimen annotation",
+          "subject_anchor": "center-bottom",
+          "dominant_subject_percent": 55,
+          "empty_paper_percent": 40,
+          "text_and_layout_percent": 5,
+          "area_definition": "这是方案中的视觉分区占比，主体分区包含夹钳开口；尚未对实际图片进行像素测量。",
+          "title_relation": "标题位于孤立标本左上方，作为环绕标本的唯一标注块，不遮住夹持开口。",
+          "main_visual_event": "一个概念夹钳与一个标题形成单一视觉中心。",
+          "manual_gesture_limit": 1,
+          "subject_view": "三分之四外观视角，开口朝右上方",
+          "primary_negative_space": "右上方形成连续L形纸色留白，向标题右侧与夹钳开口延伸。",
+          "title_anchor": "左上，左边距72px，上边距96px"
+        },
+        "typography": {
+          "id": "type_programmatic",
+          "support": "辅助事实角色使用等宽或窄体信息字；本图不呈现辅助事实。",
+          "annotation": "标题承担唯一标注角色，无其他标注文字。",
+          "scale_ratio": null,
+          "scale_ratio_note": "本图仅有一个文字层级，双层字号比不适用。",
+          "display": "中等字重的可读中文无衬线黑体，96px，行距1.15；保持整字。"
+        },
+        "texture": {
+          "halftone": "45度单一圆点网，局部使用20%、45%、75%网点覆盖率表示外壳表面明暗；轮廓与文字使用100%实地墨。",
+          "print_process": "用轻度网点表现单墨印刷复制，深浅来自纸色与网点疏密。",
+          "paper": "平整冷灰纸面，无污渍、撕裂或重度做旧。",
+          "manual_gesture_count": 0,
+          "restrictions": [
+            "无第二种墨",
+            "无套色偏移",
+            "无粗颗粒侵蚀文字",
+            "无手写圈画"
+          ]
+        },
+        "resolved_defaults": {
+          "paper": "#E9E9E5",
+          "ink": "#2148B8",
+          "composition": "composition_specimen_annotation",
+          "typography": "type_programmatic"
+        },
+        "within_recipe_choices": {
+          "dominant_subject_percent": 55,
+          "allowed_subject_percent": [
+            45,
+            65
+          ],
+          "empty_paper_percent": 40,
+          "allowed_empty_percent": [
+            35,
+            55
+          ]
+        },
+        "image_id": "case-A-cover",
+        "channel": "微信贴图短文封面",
+        "aspect_ratio": "3:4",
+        "canvas_px": {
+          "width": 900,
+          "height": 1200
+        },
+        "exact_text": "制动状态如何验证？",
+        "text_lines": [
+          "制动状态",
+          "如何验证？"
+        ],
+        "language": "简体中文",
+        "overrides": [
+          {
+            "field": "aspect_ratio",
+            "value": "3:4",
+            "reason": "用户明确指定。"
+          },
+          {
+            "field": "canvas_px",
+            "value": {
+              "width": 900,
+              "height": 1200
+            },
+            "reason": "将指定比例落实为确定画布。"
+          },
+          {
+            "field": "subject",
+            "value": "仅表达外观的概念夹钳",
+            "reason": "用户指定概念夹钳，且缺少内部工程结构资料。"
+          },
+          {
+            "field": "language / exact_text",
+            "value": "简体中文 / 制动状态如何验证？",
+            "reason": "逐字遵循用户文案。"
+          },
+          {
+            "field": "typography.scale_ratio",
+            "value": null,
+            "reason": "封面只使用指定的一条文字，因此只呈现标题层级。"
+          },
+          {
+            "field": "manual_gesture_count",
+            "value": 0,
+            "reason": "技术主题保持清楚，无需手工标记。"
+          }
+        ]
+      },
+      "prompt": "为「微信贴图短文」设计一张面向工程师的3:4竖版单墨编辑封面，一张900×1200px独立画布。使用technical-specimen配方。主体是一件原创的概念电机械制动夹钳，保留夹钳轮廓、一对相向夹持面和不透明执行器外壳。这是外观概念表达。已知案例通过电机与传动机构产生夹紧力，但缺少内部结构资料，因此只画外观，不画剖面、透明外壳、齿轮排布、传感器布置、尺寸或性能曲线。冷灰纸色#E9E9E5，唯一墨色为钴蓝#2148B8。纸色不计作墨色。所有轮廓、文字和网点只使用这一种蓝墨，明暗来自纸色与网点疏密，不加入黑墨、灰墨或其他颜色。采用孤立标本标注版式：夹钳以三分之四外观视角置于中下方，开口朝右上；主体视觉分区占55%，连续纸色留白占40%，文字版面占5%。右上方保留清楚的L形留白。唯一标题在主体左上方，左边距72px、上边距96px，与主体形成环绕标本的标注关系，不遮住夹持开口。使用中等字重的可读中文无衬线黑体，96px，行距1.15，保持整字。封面唯一文字逐字为「制动状态如何验证？」。排两行，第一行「制动状态」，第二行「如何验证？」；保留中文问号，不增删字符。不要添加副标题、编号、说明、标志或水印。轮廓与标题使用实地蓝墨；外壳局部使用45度单一圆点网，20%、45%、75%三档网点覆盖率，以轻度网点表现单墨印刷复制。保持字形和结构边缘清楚，无重度做旧、污渍、粗颗粒、手写圈画或套色偏移。全图只有一个主要视觉事件：概念夹钳与验证问题。原创构图，只输出这张符合3:4比例的封面。",
+      "checks": {
+        "text_length": {
+          "status": "pass",
+          "title_limit": 20,
+          "title_character_count": 14,
+          "title_count_method": "按Unicode非空白字符计数，包含标点。",
+          "body_range": [
+            150,
+            250
+          ],
+          "body_character_count": 199,
+          "body_han_character_count": 178,
+          "body_count_method": "调用材料未另定算法。主计数按Unicode非空白字符计，包含标点，SIL计3字符；另核对纯汉字数，两种口径均在范围内。"
+        },
+        "fact_boundary": {
+          "status": "pass",
+          "confirmed": [
+            "虚构研发案例",
+            "电机与传动机构产生夹紧力",
+            "台架记录指令、位置与夹紧力",
+            "尚无寿命、响应时间、SIL或商业成熟度数据"
+          ],
+          "author_judgment_or_plan": [
+            "关注每次动作留下的证据及记录不能确认的状态",
+            "先明确条件与判据",
+            "后续开展故障和长期测试",
+            "现有记录不足以支持更安全的结论"
+          ],
+          "unsupported_claims_added": false
+        },
+        "language_and_style": {
+          "status": "pass",
+          "language": "简体中文",
+          "engineering_first_person_preserved": true,
+          "formulaic_contrast_removed": true,
+          "em_dash_count": 0
+        },
+        "visual_plan": {
+          "subject_and_features": {
+            "status": "pass",
+            "evidence": "使用概念夹钳外观及三项辨识特征，不把未知内部结构画成已确认事实。"
+          },
+          "hierarchy_and_negative_space": {
+            "status": "pass",
+            "evidence": "一个主体、一个标题块、一块连续L形留白；主体55%及留白40%均在所选配方范围内。"
+          },
+          "title_subject_relationship": {
+            "status": "pass",
+            "evidence": "标题作为标本外围唯一标注块；文章标题与封面文案承担不同信息。"
+          },
+          "unsupported_visual_claims": {
+            "status": "pass",
+            "evidence": "不使用性能曲线、认证徽章、安全提升数值或真实产品结构暗示。"
+          },
+          "contract": {
+            "status": "pass",
+            "aspect_ratio": "3:4",
+            "ink_count": 1,
+            "exact_text": "制动状态如何验证？",
+            "language": "简体中文",
+            "exact_text_in_prompt": true
+          }
+        },
+        "actual_image": {
+          "status": "pending",
+          "reason": "仅交付方案与提示词，未生成、查看或验收实际图片。",
+          "pending_items": [
+            "实际字形正确性",
+            "文字截断与读取顺序",
+            "实际画幅与独立画布",
+            "实际墨色数量与纸色",
+            "主体辨识度及可见结构",
+            "留白形状与视觉占比",
+            "标题与主体的实际层级",
+            "网点是否破坏细节"
+          ]
+        },
+        "generation_performed": false,
+        "publication_performed": false
+      }
+    },
+    {
+      "id": "B",
+      "title": "A workflow I can test",
+      "body": "In this fictional development case, a motor and transmission generate clamping force in an actuator. Our bench records commands, position, and clamping force so we can compare commanded actions with the observed response.\n\nFor me, a testable workflow starts with a question and an explicit pass condition. I would define the test conditions, record the three signals for each action, and compare the results with the expected response. Differences would guide the next test.\n\nThese records are a starting point. They do not establish lifetime, response time, SIL, or commercial readiness. Those data are still unavailable. Fault testing and longer duration testing remain next steps. My engineering judgment is to keep each conclusion tied to evidence that another engineer can inspect.",
+      "changes": [
+        {
+          "action": "将同一虚构案例改写为三段英文LinkedIn正文。",
+          "reason": "依次呈现可用事实、第一人称工作方法、证据边界。"
+        },
+        {
+          "action": "保留电机、传动机构、夹紧力及三项台架记录。",
+          "reason": "材料中的工程事实不变。"
+        },
+        {
+          "action": "用“For me”“I would”和“My engineering judgment”标识作者判断。",
+          "reason": "测试条件、判据和下一轮测试属于提议的工作方法。"
+        },
+        {
+          "action": "把实测与预期的差异作为下一次测试的输入。",
+          "reason": "表达可测试工作流的反馈关系，不宣称任何特定测试已经成功。"
+        },
+        {
+          "action": "保留故障和长期测试为后续工作，并明确缺少四类数据。",
+          "reason": "不添加精度、安全提升、响应速度、寿命或商业成熟度结论。"
+        },
+        {
+          "action": "正文标题描述作者的方法，封面使用用户给定的行动句。",
+          "reason": "标题与封面各自承担信息，避免重复。"
+        }
+      ],
+      "recipe": {
+        "id": "technical-specimen",
+        "selection_reason": "技术与机械主题，使用孤立标本及外围标题，向工程师提出核对证据的问题。",
+        "stage": "方案及最终提示词，不生图",
+        "subject": {
+          "name": "概念电机械制动夹钳",
+          "representation": "原创外观概念表达，不对应已验证产品或真实结构图。",
+          "recognition_features": [
+            "夹钳主体",
+            "一对相向夹持面",
+            "不透明执行器外壳"
+          ],
+          "confirmed_mechanism": "执行器通过电机与传动机构产生夹紧力。",
+          "engineering_boundary": "输入没有内部结构资料，只画外观。不画剖面、透明外壳、齿轮排布、传感器布置、结构尺寸或性能曲线。"
+        },
+        "paper": {
+          "id": "substrate_cool_gray",
+          "name": "Cool Gray",
+          "hex": "#E9E9E5",
+          "counts_as_ink": false
+        },
+        "inks": [
+          {
+            "id": "ink_cobalt",
+            "name": "Cobalt",
+            "hex": "#2148B8",
+            "role": "主体、标题与网点共用的唯一墨色"
+          }
+        ],
+        "ink_count": 1,
+        "composition": {
+          "id": "composition_specimen_annotation",
+          "layout": "specimen annotation",
+          "subject_anchor": "center-bottom",
+          "dominant_subject_percent": 55,
+          "empty_paper_percent": 40,
+          "text_and_layout_percent": 5,
+          "area_definition": "这是方案中的视觉分区占比，主体分区包含夹钳开口；尚未对实际图片进行像素测量。",
+          "title_relation": "标题位于孤立标本左上方，作为环绕标本的唯一标注块，不遮住夹持开口。",
+          "main_visual_event": "一个概念夹钳与一个标题形成单一视觉中心。",
+          "manual_gesture_limit": 1,
+          "subject_view": "三分之四外观视角，开口朝左上方",
+          "primary_negative_space": "左上至左侧形成连续L形纸色留白，标题与夹钳之间保持清楚的纸色间隔。",
+          "title_anchor": "左上，左边距96px，上边距96px"
+        },
+        "typography": {
+          "id": "type_programmatic",
+          "support": "辅助事实角色使用等宽或窄体信息字；本图不呈现辅助事实。",
+          "annotation": "标题承担唯一标注角色，无其他标注文字。",
+          "scale_ratio": null,
+          "scale_ratio_note": "本图仅有一个文字层级，双层字号比不适用。",
+          "display": "Medium-weight engineered grotesk sans, 96px, 1.12 line height; preserve the supplied sentence case."
+        },
+        "texture": {
+          "halftone": "45度单一圆点网，局部使用20%、45%、75%网点覆盖率表示外壳表面明暗；轮廓与文字使用100%实地墨。",
+          "print_process": "用轻度网点表现单墨印刷复制，深浅来自纸色与网点疏密。",
+          "paper": "平整冷灰纸面，无污渍、撕裂或重度做旧。",
+          "manual_gesture_count": 0,
+          "restrictions": [
+            "无第二种墨",
+            "无套色偏移",
+            "无粗颗粒侵蚀文字",
+            "无手写圈画"
+          ]
+        },
+        "resolved_defaults": {
+          "paper": "#E9E9E5",
+          "ink": "#2148B8",
+          "composition": "composition_specimen_annotation",
+          "typography": "type_programmatic"
+        },
+        "within_recipe_choices": {
+          "dominant_subject_percent": 55,
+          "allowed_subject_percent": [
+            45,
+            65
+          ],
+          "empty_paper_percent": 40,
+          "allowed_empty_percent": [
+            35,
+            55
+          ]
+        },
+        "image_id": "case-B-cover",
+        "channel": "LinkedIn post cover",
+        "aspect_ratio": "4:3",
+        "canvas_px": {
+          "width": 1600,
+          "height": 1200
+        },
+        "exact_text": "Make braking observable",
+        "text_lines": [
+          "Make braking",
+          "observable"
+        ],
+        "language": "English",
+        "overrides": [
+          {
+            "field": "aspect_ratio",
+            "value": "4:3",
+            "reason": "用户明确指定。"
+          },
+          {
+            "field": "canvas_px",
+            "value": {
+              "width": 1600,
+              "height": 1200
+            },
+            "reason": "将指定比例落实为确定画布。"
+          },
+          {
+            "field": "subject",
+            "value": "仅表达外观的概念夹钳",
+            "reason": "沿用同一个虚构案例，缺少内部结构资料。"
+          },
+          {
+            "field": "ink",
+            "value": "一种蓝色墨：Cobalt #2148B8",
+            "reason": "遵循蓝墨要求，与默认配方一致，不引入第二种墨。"
+          },
+          {
+            "field": "language / exact_text",
+            "value": "English / Make braking observable",
+            "reason": "逐字遵循用户文案，保留大小写。"
+          },
+          {
+            "field": "typography.scale_ratio",
+            "value": null,
+            "reason": "封面只使用指定的一条英文文字。"
+          },
+          {
+            "field": "manual_gesture_count",
+            "value": 0,
+            "reason": "保持技术版面清楚，无需手工标记。"
+          }
+        ]
+      },
+      "prompt": "Design one original 4:3 editorial cover for a LinkedIn engineering post, on one independent 1600×1200px canvas. Use the technical-specimen recipe. Show one conceptual electromechanical brake caliper as an exterior specimen, with a recognizable caliper body, two opposing clamping faces, and an opaque actuator housing. This is a fictional development case. The supplied case says a motor and transmission generate clamping force, but supplies no internal geometry. Keep the housing closed. Do not invent cutaways, gear arrangements, sensor locations, dimensions, performance plots, or safety symbols. Use Cool Gray paper #E9E9E5 and exactly one blue ink, Cobalt #2148B8. Paper is the substrate and does not count as an ink. All outlines, text, and halftone dots use this same blue; lighter values come from paper exposure and dot coverage, with no black, gray, or second ink. Use a specimen annotation composition: place the caliper in a three-quarter exterior view at center-bottom, with its opening directed toward the upper left. Allocate 55% of the composition to the subject region, 40% to connected empty paper, and 5% to the text region. Preserve a distinct L-shaped empty-paper region along the upper left and left side. Place the sole headline at the upper left, 96px from the left and top edges. It should read as the specimen label, remain separate from the clamp opening, and create a clear relationship with the isolated object. Use a medium-weight engineered grotesk sans, 96px, with 1.12 line height. Render exactly this English text, preserving capitalization: “Make braking observable”. Set “Make braking” on the first line and “observable” on the second; the line break substitutes for the single space between those words. Add no other words, labels, numbers, logo, or watermark. Use solid blue for contours and letters. Shade only selected exterior surfaces with a single 45-degree round-dot screen at 20%, 45%, and 75% coverage. Keep the print texture light and the type intact. No heavy distress, stains, coarse grain, handwriting, or registration shift. Make the isolated caliper and its headline the only major visual event. Output one canvas with the specified 4:3 aspect ratio.",
+      "checks": {
+        "text_length": {
+          "status": "pass",
+          "body_range_words": [
+            100,
+            150
+          ],
+          "body_word_count": 121,
+          "count_method": "按空白分隔英文单词；标点附着于单词，不单独计数；标题不计入正文。",
+          "title_word_count": 5,
+          "combined_title_and_body_word_count": 126
+        },
+        "fact_boundary": {
+          "status": "pass",
+          "confirmed": [
+            "Fictional development case",
+            "A motor and transmission generate clamping force",
+            "The bench records commands, position, and clamping force",
+            "Lifetime, response time, SIL, and commercial readiness data are unavailable"
+          ],
+          "author_judgment_or_plan": [
+            "Start with a question and an explicit pass condition",
+            "Define conditions and compare observations with expected response",
+            "Use differences to guide the next test",
+            "Fault and longer duration testing remain next steps",
+            "Tie each conclusion to inspectable evidence"
+          ],
+          "unsupported_claims_added": false
+        },
+        "language_and_style": {
+          "status": "pass",
+          "language": "English",
+          "engineering_first_person_preserved": true,
+          "em_dash_count": 0
+        },
+        "visual_plan": {
+          "subject_and_features": {
+            "status": "pass",
+            "evidence": "使用概念夹钳外观及三项辨识特征，不把未知内部结构画成已确认事实。"
+          },
+          "hierarchy_and_negative_space": {
+            "status": "pass",
+            "evidence": "一个主体、一个标题块、一块连续L形留白；主体55%及留白40%均在所选配方范围内。"
+          },
+          "title_subject_relationship": {
+            "status": "pass",
+            "evidence": "标题作为标本外围唯一标注块；文章标题与封面文案承担不同信息。"
+          },
+          "unsupported_visual_claims": {
+            "status": "pass",
+            "evidence": "不使用性能曲线、认证徽章、安全提升数值或真实产品结构暗示。"
+          },
+          "contract": {
+            "status": "pass",
+            "aspect_ratio": "4:3",
+            "ink_count": 1,
+            "ink_family": "blue",
+            "exact_text": "Make braking observable",
+            "language": "English",
+            "exact_text_in_prompt": true
+          }
+        },
+        "actual_image": {
+          "status": "pending",
+          "reason": "仅交付方案与提示词，未生成、查看或验收实际图片。",
+          "pending_items": [
+            "实际字形正确性",
+            "文字截断与读取顺序",
+            "实际画幅与独立画布",
+            "实际墨色数量与纸色",
+            "主体辨识度及可见结构",
+            "留白形状与视觉占比",
+            "标题与主体的实际层级",
+            "网点是否破坏细节"
+          ]
+        },
+        "generation_performed": false,
+        "publication_performed": false
+      }
+    }
+  ]
+}
+
